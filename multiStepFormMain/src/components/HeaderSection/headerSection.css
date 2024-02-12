@@ -1,0 +1,10 @@
+.sectionTitle {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.sectionDescription{
+    color: var(--Cool-gray);
+    font-size: 0.9rem;
+    margin: 15px 0 0;
+    line-height: 1.3rem;
+}

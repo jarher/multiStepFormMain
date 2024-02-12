@@ -1,65 +1,121 @@
+/* eslint-disable react/prop-types */
 import "./userInfo.css";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../Provider";
 import { Button } from "../../components/Button";
+import HeaderSection from "../../components/HeaderSection/HeaderSection";
+import Form from "../../components/Form/Form";
+import { checkValidity } from "../../Validator/Validator.js";
 
 export default function UserInfo() {
-  const {
-    setName,
-    setEmail,
-    setPhone,
-    userName,
-    userEmail,
-    userPhone,
-  } = useContext(DataContext);
+  const [nameValid, setNameValid] = useState({ isValid: true, text: "" });
+  const [emailValid, setEmailValid] = useState({ isValid: true, text: "" });
+  const [phoneValid, setPhoneValid] = useState({ isValid: true, text: "" });
+  const [isActive, setIsActive] = useState(true);
 
+  const { setName, setEmail, setPhone, userName, userEmail, userPhone } =
+    useContext(DataContext);
+
+  const userInputData = [
+    {
+      labelTitle: "name",
+      inputType: "text",
+      inputName: "username",
+      inputPlaceholder: "e.g. Stephen king",
+      defaultValue: userName,
+    },
+    {
+      labelTitle: "Email Address",
+      inputType: "email",
+      inputName: "useremail",
+      inputPlaceholder: "e.g. stephenking@lorem.com",
+      defaultValue: userEmail,
+    },
+    {
+      labelTitle: "Phone Number",
+      inputType: "tel",
+      inputName: "userphone",
+      inputPlaceholder: "e.g. +1 234 567 890",
+      defaultValue: userPhone,
+    },
+  ];
+  // function checkData() {
+  //   const  result  = checkValidity({ userName, userEmail, userPhone });
+  //   console.log(result);
+  //   setNameValid(result.nameValidity);
+  //   setEmailValid(result.emailValidity);
+  //   setPhoneValid(result.phoneValidity);
+  //   nameValid.isValid && emailValid.isValid && phoneValid.isValid
+  //     ? setIsActive(true)
+  //     : setIsActive(false);
+  // }
+  function UserInput({ element }) {
+    const { labelTitle, inputType, inputName, inputPlaceholder, defaultValue } = element;
+    return (
+      <div className="userInputWrapper">
+        <div className="labelWrapper">
+          <label htmlFor="username">{labelTitle}</label>
+          <span className="input-error">
+            {!nameValid.isValid && nameValid.text}
+          </span>
+        </div>
+        <input
+          type={inputType}
+          name={inputName}
+          id={inputName}
+          placeholder={inputPlaceholder}
+          defaultValue={defaultValue}
+        />
+      </div>
+    );
+  }
+
+  useEffect(()=>{
+
+  },[]);
   return (
     <section className="userInfoSection">
       <div className="container">
         <div className="formWrapper">
-          <h1 className="formTitle">Personal info</h1>
-          <p className="formDescription">
-            Please provide your name, email address, and phone number.
-          </p>
-          <form>
-            <div className="inputWrapper">
-              <label htmlFor="username">name</label>
+          <HeaderSection
+            title={"Personal info"}
+            description={
+              " Please provide your name, email address, and phone number."
+            }
+          />
+          <Form>
+            {/* <div className="userInputWrapper">
+              <div className="labelWrapper">
+                <label htmlFor="username">name</label>
+                <span className="input-error">
+                  {!nameValid.isValid && nameValid.text}
+                </span>
+              </div>
               <input
                 type="text"
                 name="username"
                 id="username"
                 placeholder="e.g. Stephen king"
                 defaultValue={userName}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                className={!nameValid.isValid && "inputInvalid"}
               />
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="useremail">Email Address</label>
-              <input
-                type="email"
-                name="useremail"
-                id="useremail"
-                placeholder="e.g. stephenking@lorem.com"
-                defaultValue={userEmail}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="userphone">Phone Number</label>
-              <input
-                type="tel"
-                name="userphone"
-                id="userphone"
-                placeholder="e.g. +1 234 567 890"
-                defaultValue={userPhone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </div>
-          </form>
+            </div> */}
+            {userInputData.map((element, index) => (
+              <UserInput element={element} key={index} />
+            ))}
+          </Form>
         </div>
-        <div className="buttonsContainer">
-          <Button url={"/plan"} text={"next"} index={1} />
-        </div>
+      </div>
+      <div className="buttonsContainer">
+        <Button
+          url={isActive && "/plan"}
+          text={"Next Step"}
+          index={1}
+          classNm={"btnNext"}
+        />
       </div>
     </section>
   );
