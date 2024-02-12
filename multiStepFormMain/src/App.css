@@ -1,12 +1,14 @@
-.container{
-
+.main {
+  display: flex;
+  flex-direction: column;
 }
-@media (min-width:600px) {
-    
+.container {
 }
-@media (min-width:1024px) {
-    
+.buttonsContainer {
 }
-@media (min-width:2560px) {
-    
+@media (min-width: 600px) {
+}
+@media (min-width: 1024px) {
+}
+@media (min-width: 2560px) {
 }

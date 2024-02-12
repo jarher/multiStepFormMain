@@ -1,12 +1,13 @@
+import "./navbar.css";
 import { useContext } from "react";
-import { DataContext } from "../Provider";
+import { DataContext } from "../../Provider";
 
 export default function Navbar() {
   const { navbarIndex } = useContext(DataContext);
   console.log(navbarIndex);
   return (
     <div className="navbarWrapper">
-      <nav className="main-nav">
+      <nav className="mainNav">
         <ul>
           <li>
             <span className={`index ${navbarIndex === 0 ? "indexActive" : ""}`}>

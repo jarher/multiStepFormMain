@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 
 const UserInfo = lazy(() => import("./pages/UserInfo/UserInfo"));
 const Plan = lazy(() => import("./pages/Plan/Plan"));
