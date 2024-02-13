@@ -3,10 +3,11 @@
   flex-direction: column;
 }
 section {
-  height: 74.6vh;
+  min-height: 74.6vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: var(--Magnolia);
 }
 .container {
   width: 90%;
@@ -45,13 +46,13 @@ section {
   height: 100%;
   line-height: 30px;
   cursor: pointer;
+  text-decoration: none;
 }
 .buttonsContainer .btnPrev a {
   color: var(--Cool-gray);
 }
 .buttonsContainer .btnNext a {
   color: var(--Light-gray);
-  text-decoration: none;
 }
 @media (min-width: 600px) {
 }

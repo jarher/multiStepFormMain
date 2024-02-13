@@ -6,7 +6,7 @@ export const data = {
   monthly: {
     plan: [
       {
-        name: "Arcade:",
+        name: "Arcade",
         image: arcadeImg,
         price: "$9/mo",
         isaddon: false,
@@ -57,21 +57,21 @@ export const data = {
   yearly: {
     plan: [
       {
-        name: "arcade",
+        name: "Arcade",
         image: arcadeImg,
         price: "$90/yr",
         isaddon: false,
         isSelected: true,
       },
       {
-        name: "advanced",
+        name: "Advanced",
         image: advanceImg,
         price: "$120/yr",
         isaddon: false,
         isSelected: false,
       },
       {
-        name: "pro",
+        name: "Pro",
         image: proImg,
         price: "$150/yr",
         isaddon: false,
