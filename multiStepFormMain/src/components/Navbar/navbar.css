@@ -1,11 +1,11 @@
 .navbarWrapper {
   background: url("../../assets/images/bg-sidebar-mobile.svg") no-repeat top
     left/cover;
-  height: calc(100vh - 74.6vh);
-  padding-top: 25px;
+  height: calc(100vh - 66.6vh);
+  padding-top: 30px;
 }
 .mainNav {
-  width: 150px;
+  width: 180px;
   margin: auto;
 }
 .mainNav ul {
@@ -16,14 +16,14 @@
   justify-content: space-between;
 }
 .mainNav .index {
-  height: 25px;
-  width: 25px;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
-  border: 1px solid var(--Light-blue);
+  border: 2px solid var(--Pastel-blue);
   display: block;
   text-align: center;
-  line-height: 23px;
-  font-size: 0.75rem;
+  line-height: 33px;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--Magnolia);
   transition: all 0.2s ease-in;
@@ -31,6 +31,7 @@
 .mainNav .indexActive {
   color: var(--Marine-blue);
   background-color: var(--Light-blue);
+  border: none;
 }
 .stepNumber,
 .stepDescription {

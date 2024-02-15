@@ -1,21 +1,30 @@
 import "./plan.css";
-import { useContext } from "react";
-import { Button } from "../../components/Button.jsx";
+import { useContext, useState, useEffect } from "react";
 import { DataContext } from "../../Provider.jsx";
 import Card from "../../components/Card/Card.jsx";
 import HeaderSection from "../../components/HeaderSection/HeaderSection.jsx";
 import Form from "../../components/Form/Form.jsx";
+import { Button } from "../../components/button/Button.jsx";
+import InputRange from "../../components/InputRange/InputRange.jsx";
 
 export default function Plan() {
-  const { timePlan, changeTimePlan, selectAddon, data } =
-    useContext(DataContext);
+  const { userData, data, setNavIndex } = useContext(DataContext);
+  const [timePlan, changeTimePlan] = useState(userData.timePlan);
+  const [cardIndex, setCardIndex] = useState(0);
 
   const dataPlan =
     timePlan === "Monthly" ? data.monthly.plan : data.yearly.plan;
 
-  selectAddon(
-    timePlan === "Monthly" ? data.monthly.addons : data.yearly.addons
-  );
+  userData.addonsSelected =
+    timePlan === "Monthly" ? data.monthly.addons : data.yearly.addons;
+
+  useEffect(() => {
+    setNavIndex(1);
+  }, []);
+
+  useEffect(() => {
+    userData.timePlan = timePlan;
+  }, [timePlan]);
 
   return (
     <section className="planSection">
@@ -28,50 +37,32 @@ export default function Plan() {
         <div className="cardWrapper">
           {dataPlan.map((plan, index) => (
             <Card
-              dataPlan={dataPlan}
               cardData={plan}
+              dataPlan={dataPlan}
+              cardIndex={cardIndex}
+              setCardIndex={setCardIndex}
               index={index}
               key={index}
             />
           ))}
         </div>
+
         <Form>
-          <div className="inputWrapper">
-            <span
-              className={`planName ${
-                timePlan === "Monthly" ? "planSelected" : ""
-              }`}
-            >
-              Monthly
-            </span>
-            <input
-              type="range"
-              name="switchPlanInput"
-              id="switchPlanInput"
-              min="0"
-              max="1"
-              defaultValue={timePlan === "Monthly" ? 0 : 1}
-              onChange={(e) => {
-                changeTimePlan(e.target.value === "0" ? "Monthly" : "Yearly");
-              }}
-            />
-            <span
-              className={`planName ${
-                timePlan === "Yearly" ? "planSelected" : ""
-              }`}
-            >
-              Yearly
-            </span>
-          </div>
+          <InputRange timePlan={timePlan} changeTimePlan={changeTimePlan} />
         </Form>
       </div>
       <div className="buttonsContainer">
-        <Button url={"/"} text={"Go Back"} index={0} classNm={"btnPrev"} />
+        <Button
+          url={"/"}
+          text={"Go Back"}
+          classNm={"btnPrev"}
+          isActive={true}
+        />
         <Button
           url={"/addons"}
           text={"Next Step"}
-          index={2}
           classNm={"btnNext"}
+          isActive={true}
         />
       </div>
     </section>

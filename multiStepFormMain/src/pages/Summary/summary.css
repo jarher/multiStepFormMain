@@ -1,9 +1,23 @@
-@media (min-width:600px) {
-    
+.totalWrapper {
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-top: 25px;
 }
-@media (min-width:1024px) {
-    
+.totalWrapper span:nth-child(1) {
+  color: var(--Cool-gray);
 }
-@media (min-width:2560px) {
-    
+.totalWrapper span:nth-child(2) {
+  font-size: 1rem;
+  color: var(--Purplish-blue);
+  font-weight: 700;
+}
+
+@media (min-width: 600px) {
+}
+@media (min-width: 1024px) {
+}
+@media (min-width: 2560px) {
 }

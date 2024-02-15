@@ -1,38 +1,60 @@
 import "./summary.css";
-import { useContext } from "react";
-import { Button } from "../../components/Button";
-
+import { useContext, useEffect } from "react";
+import { Button } from "../../components/button/Button";
 import { DataContext } from "../../Provider";
-import Table from "../../components/Table";
+import Table from "../../components/Table/Table";
+import HeaderSection from "../../components/HeaderSection/HeaderSection";
 
 export default function Summary() {
-  const { timePlan, planSelected, addonSelected } = useContext(DataContext);
+  const { userData, setNavIndex } = useContext(DataContext);
 
   const planPrice = Number.parseInt(
-    planSelected.price.replace(/[+$/a-z^d]/g, "")
+    userData.planSelected.price.replace(/[+$/a-z^d]/g, "")
   );
 
-  const addonPrice = addonSelected
+  const addonPrice = userData.addonsSelected
     .filter((addon) => addon.isSelected === true)
     .map((addon) => Number.parseInt(addon.price.replace(/[+$/a-z^d]/g, "")))
     .reduce((acc, currentPrice) => acc + currentPrice, 0);
 
   const total = `$${planPrice + addonPrice}/${
-    timePlan === "Monthly" ? "mo" : "yr"
+    userData.timePlan === "Monthly" ? "mo" : "yr"
   }`;
+
+  useEffect(() => {
+    setNavIndex(3);
+  }, []);
 
   return (
     <section className="summarySection">
       <div className="container">
         <div className="summaryWrapper">
-          <h1>Finishing up</h1>
-          <p>Double check everything looks OK before confirming.</p>
-          <Table data={{ planSelected, addonSelected, timePlan, total }} />
+          <HeaderSection
+            title={"Finishing up"}
+            description={"Double check everything looks OK before confirming."}
+          />
+          <Table data={{ userData }} />
+          <div className="totalWrapper">
+            <span>
+              Total (per {userData.timePlan === "Monthly" ? "month" : "year"})
+            </span>
+            <span>{total}</span>
+          </div>
         </div>
-        <div className="buttonsContainer">
-          <Button url={"/addons"} text={"Go Back"} index={2} />
-          <Button url={"/confirm"} text={"Confirm"} />
-        </div>
+      </div>
+      <div className="buttonsContainer">
+        <Button
+          url={"/addons"}
+          text={"Go Back"}
+          classNm={"btnPrev"}
+          isActive={true}
+        />
+        <Button
+          url={"/confirm"}
+          text={"Confirm"}
+          classNm={"btnConfirm"}
+          isActive={true}
+        />
       </div>
     </section>
   );

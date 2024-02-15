@@ -1,10 +1,11 @@
 .sectionTitle {
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
+  color: var(--Marine-blue);
 }
 .sectionDescription{
     color: var(--Cool-gray);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     margin: 15px 0 0;
     line-height: 1.3rem;
 }

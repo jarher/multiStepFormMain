@@ -1,13 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import "./pickAddon.css";
+import { useContext } from "react";
+import { DataContext } from "../../Provider";
 
-import { useContext, useState } from "react";
-import { DataContext } from "../Provider";
-
-export default function PickAddon({ addon, index }) {
-  const {addonSelected} = useContext(DataContext);
-  const [isSelected, setIsSelected] = useState(addon.isSelected);
-  addon.isSelected = isSelected;
+export default function PickAddon({ addon, index, setIsActive, isChecked }) {
+  const { userData } = useContext(DataContext);
 
   return (
     <div className="pickWrapper">
@@ -15,10 +13,10 @@ export default function PickAddon({ addon, index }) {
         type="checkbox"
         name={`pickAddon${index}`}
         id={`pickAddon${index}`}
-        defaultChecked={isSelected}
-        defaultValue={addon.addonKey}
+        defaultChecked={userData.addonsSelected[index].isSelected}
         onClick={(e) => {
-          setIsSelected(() => (isSelected ? false : true));
+          userData.addonsSelected[index].isSelected = e.target.checked;
+          setIsActive(isChecked(userData.addonsSelected));
         }}
       />
       <div className="pickMainTextsWrapper">

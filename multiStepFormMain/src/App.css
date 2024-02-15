@@ -11,7 +11,7 @@ section {
 }
 .container {
   width: 90%;
-  margin: -55px auto 0;
+  margin: -72px auto 0;
   background-color: var(--White);
   padding: 25px;
   border-radius: 7px;
@@ -20,39 +20,16 @@ section {
 }
 
 .buttonsContainer {
-  height: 55px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
   background-color: var(--White);
 }
-.buttonsContainer button {
-  height: 30px;
-  border: none;
-}
-.buttonsContainer .btnNext {
-  background-color: var(--Marine-blue);
-  border-radius: 3px;
-  padding: 0 10px;
-}
-.buttonsContainer .btnPrev {
-  background-color: transparent;
-}
-.buttonsContainer a {
-  font-size: 0.7rem;
-  display: block;
-  width: 100%;
-  height: 100%;
-  line-height: 30px;
-  cursor: pointer;
-  text-decoration: none;
-}
-.buttonsContainer .btnPrev a {
-  color: var(--Cool-gray);
-}
-.buttonsContainer .btnNext a {
-  color: var(--Light-gray);
+
+.elementSelected {
+  background-color: var(--Alabaster)!important;
+  border-color: var(--Purplish-blue)!important;
 }
 @media (min-width: 600px) {
 }

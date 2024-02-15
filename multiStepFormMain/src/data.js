@@ -29,7 +29,6 @@ export const data = {
     ],
     addons: [
       {
-        addonKey: "addM1",
         name: "Online Service",
         description: "Access to multiplayer games",
         price: "+$1/mo",
@@ -37,7 +36,6 @@ export const data = {
         isaddon: true,
       },
       {
-        addonKey: "addM2",
         name: "Larger Storage",
         description: "Extra 1TB of cloud save",
         price: "+$2/mo",
@@ -45,7 +43,6 @@ export const data = {
         isaddon: true,
       },
       {
-        addonKey: "addM3",
         name: "Customizable profile",
         description: "Custom theme on your profile",
         price: "+$2/mo",
@@ -80,7 +77,6 @@ export const data = {
     ],
     addons: [
       {
-        addonKey: "addY1",
         name: "Online Service",
         description: "Access to multiplayer games",
         price: "+$10/yr",
@@ -88,7 +84,6 @@ export const data = {
         isaddon: true,
       },
       {
-        addonKey: "addY2",
         name: "Larger Storage",
         description: "Extra 1TB of cloud save",
         price: "+$20/yr",
@@ -96,7 +91,6 @@ export const data = {
         isaddon: true,
       },
       {
-        addonKey: "addY3",
         name: "Customizable profile",
         description: "Custom theme on your profile",
         price: "+$20/yr",

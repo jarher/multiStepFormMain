@@ -1,0 +1,48 @@
+button {
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  padding: 0 10px;
+  transition: all 0.2s ease-in;
+}
+.btnNext:disabled {
+  background-color: var(--Light-gray);
+}
+.btnNext:disabled a {
+  color: var(--White);
+}
+.btnNext {
+  background-color: var(--Marine-blue);
+}
+.btnPrev {
+  background-color: transparent;
+  padding: 0;
+  text-align: left;
+}
+.btnConfirm {
+  background-color: var(--Purplish-blue);
+}
+.btnPrev,
+.btnConfirm {
+  width: 100px;
+}
+.btnConfirm a {
+  color: var(--Magnolia);
+}
+button a {
+  font-size: 0.8rem;
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 40px;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.btnPrev a {
+  color: var(--Cool-gray);
+}
+.btnNext a {
+  color: var(--Light-gray);
+}

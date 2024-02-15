@@ -2,7 +2,7 @@
 import "./userInfo.css";
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../Provider";
-import { Button } from "../../components/Button";
+import { Button } from "../../components/button/Button.jsx";
 import HeaderSection from "../../components/HeaderSection/HeaderSection";
 import Form from "../../components/Form/Form";
 import { checkValidity } from "../../Validator/Validator.js";
@@ -11,10 +11,9 @@ export default function UserInfo() {
   const [nameValid, setNameValid] = useState({ isValid: true, text: "" });
   const [emailValid, setEmailValid] = useState({ isValid: true, text: "" });
   const [phoneValid, setPhoneValid] = useState({ isValid: true, text: "" });
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(false);
 
-  const { setName, setEmail, setPhone, userName, userEmail, userPhone } =
-    useContext(DataContext);
+  const { userData, setNavIndex } = useContext(DataContext);
 
   const userInputData = [
     {
@@ -22,21 +21,24 @@ export default function UserInfo() {
       inputType: "text",
       inputName: "username",
       inputPlaceholder: "e.g. Stephen king",
-      defaultValue: userName,
+      defaultValue: userData.userName,
+      changeHandle:(e) => userData.userName = e.target.value
     },
     {
       labelTitle: "Email Address",
       inputType: "email",
       inputName: "useremail",
       inputPlaceholder: "e.g. stephenking@lorem.com",
-      defaultValue: userEmail,
+      defaultValue: userData.userEmail,
+      changeHandle:(e) => userData.userEmail = e.target.value
     },
     {
       labelTitle: "Phone Number",
       inputType: "tel",
       inputName: "userphone",
       inputPlaceholder: "e.g. +1 234 567 890",
-      defaultValue: userPhone,
+      defaultValue: userData.userPhone,
+      changeHandle:(e) => userData.userPhone = e.target.value
     },
   ];
   // function checkData() {
@@ -50,7 +52,14 @@ export default function UserInfo() {
   //     : setIsActive(false);
   // }
   function UserInput({ element }) {
-    const { labelTitle, inputType, inputName, inputPlaceholder, defaultValue } = element;
+    const {
+      labelTitle,
+      inputType,
+      inputName,
+      inputPlaceholder,
+      defaultValue,
+      changeHandle,
+    } = element;
     return (
       <div className="userInputWrapper">
         <div className="labelWrapper">
@@ -65,14 +74,16 @@ export default function UserInfo() {
           id={inputName}
           placeholder={inputPlaceholder}
           defaultValue={defaultValue}
+          onChange={changeHandle}
         />
       </div>
     );
   }
 
-  useEffect(()=>{
-
-  },[]);
+  useEffect(() => {
+    setNavIndex(0);
+  }, []);
+  
   return (
     <section className="userInfoSection">
       <div className="container">
@@ -111,10 +122,10 @@ export default function UserInfo() {
       </div>
       <div className="buttonsContainer">
         <Button
-          url={isActive && "/plan"}
+          url={"/plan"}
           text={"Next Step"}
-          index={1}
           classNm={"btnNext"}
+          isActive={isActive}
         />
       </div>
     </section>

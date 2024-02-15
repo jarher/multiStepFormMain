@@ -1,9 +1,20 @@
-@media (min-width:600px) {
-    
+.confirmSection img {
+  height: 55px;
+  width: 55px;
+  display: block;
+  margin: 55px auto auto;
 }
-@media (min-width:1024px) {
-    
+.confirmSection .sectionDescription,
+.confirmSection .sectionTitle {
+  text-align: center;
 }
-@media (min-width:2560px) {
-    
+.confirmSection .sectionTitle {
+  margin-top: 25px;
+  
+}
+@media (min-width: 600px) {
+}
+@media (min-width: 1024px) {
+}
+@media (min-width: 2560px) {
 }

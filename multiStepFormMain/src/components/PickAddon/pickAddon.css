@@ -1,0 +1,40 @@
+.pickWrapper {
+  margin-top: 15px;
+  border: 1px solid var(--Light-gray);
+  border-radius: 5px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 65px;
+}
+.pickWrapper input {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+.pickWrapper input:checked,
+.pickWrapper input:visited{
+    background-color: var(--Purplish-blue);
+}
+.pickMainTextsWrapper {
+  width: 160px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pickTitle {
+  color: var(--Marine-blue);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+.pickDescription {
+  color: var(--Cool-gray);
+  font-size: 0.75rem;
+}
+.pickPrice {
+  font-size: 0.75rem;
+  color: var(--Purplish-blue);
+  font-weight: 500;
+}

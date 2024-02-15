@@ -1,19 +1,27 @@
 /* eslint-disable react/prop-types */
 import "./Card.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { DataContext } from "../../Provider";
 
-export default function Card({ dataPlan, cardData, index }) {
-  const { setPlan } = useContext(DataContext);
+export default function Card({
+  cardData,
+  dataPlan,
+  cardIndex,
+  setCardIndex,
+  index,
+}) {
+  const { userData } = useContext(DataContext);
+
+  const newPlan = dataPlan[index];
 
   return (
     <div
+      className={`card ${cardIndex === index ? "elementSelected" : ""}`}
       onClick={() => {
-        const plan = dataPlan[index];
-        plan.isSelected = true;
-        setPlan(plan);
+        newPlan.isSelected = true;
+        userData.planSelected = newPlan;
+        setCardIndex(index);
       }}
-      className={`card`}
     >
       <img src={cardData.image} alt="card-icon" className="cardIcon" />
       <div className="cardTextWrapper">

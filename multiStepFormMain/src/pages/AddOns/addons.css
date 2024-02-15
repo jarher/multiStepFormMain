@@ -1,3 +1,9 @@
+.addonsSection form{
+    margin-top: 10px;
+}
+.planSection .buttonsContainer {
+  flex-direction: row;
+}
 @media (min-width:600px) {
     
 }
