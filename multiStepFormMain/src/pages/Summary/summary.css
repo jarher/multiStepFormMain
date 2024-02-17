@@ -14,10 +14,11 @@
   color: var(--Purplish-blue);
   font-weight: 700;
 }
-
-@media (min-width: 600px) {
+.summarySection .buttonsContainer {
+  flex-direction: row;
 }
-@media (min-width: 1024px) {
-}
-@media (min-width: 2560px) {
+@media (min-width: 768px) {
+  .totalWrapper span:nth-child(1) {
+    font-size: 0.75rem;
+  }
 }

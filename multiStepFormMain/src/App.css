@@ -28,12 +28,45 @@ section {
 }
 
 .elementSelected {
-  background-color: var(--Alabaster)!important;
-  border-color: var(--Purplish-blue)!important;
+  background-color: var(--Alabaster) !important;
+  border-color: var(--Purplish-blue) !important;
 }
-@media (min-width: 600px) {
+@media (min-width: 768px) {
+  body {
+    background-color: var(--Magnolia);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .main {
+    padding: 10px;
+    flex-direction: row;
+    width: 675px;
+    height: 435px;
+    background-color: var(--White);
+    border-radius: 10px;
+  }
+  section {
+    flex: 2;
+    background-color: var(--White);
+    padding: 0 50px;
+    min-height: 100%;
+  }
+  .container {
+    width: 100%;
+    margin:35px 0 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .buttonsContainer {
+    padding: 0;
+    margin-bottom: 15px;
+  }
 }
 @media (min-width: 1024px) {
-}
-@media (min-width: 2560px) {
+  section {
+    padding: 0 65px;
+  }
 }

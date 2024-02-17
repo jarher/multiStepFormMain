@@ -18,13 +18,24 @@ button {
   background-color: transparent;
   padding: 0;
   text-align: left;
+  cursor: pointer;
 }
 .btnConfirm {
   background-color: var(--Purplish-blue);
 }
+.btnConfirm:hover {
+  background-color: var(--Pastel-blue);
+}
+.btnConfirm:hover a{
+  color: var(--Alabaster);
+}
 .btnPrev,
 .btnConfirm {
   width: 100px;
+}
+.btnPrev:hover a {
+  color: var(--Marine-blue);
+  font-weight: 700;
 }
 .btnConfirm a {
   color: var(--Magnolia);

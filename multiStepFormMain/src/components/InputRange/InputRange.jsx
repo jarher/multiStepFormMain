@@ -1,7 +1,25 @@
 /* eslint-disable react/prop-types */
+import { useContext, useEffect } from "react";
 import "./InputRange.css";
+import { DataContext } from "../../Provider";
 
 export default function InputRange({ timePlan, changeTimePlan }) {
+  const { userData, data } = useContext(DataContext);
+
+  useEffect(() => {
+    const index = userData.planSelected.planIndex;
+
+    userData.planSelected =
+      timePlan === "Monthly"
+        ? data.monthly.plan[index]
+        : data.yearly.plan[index];
+
+    userData.planSelected.isSelected = true;
+    
+  }, [timePlan]);
+
+  console.log(userData);
+
   return (
     <div className="inputWrapper">
       <span
@@ -17,7 +35,7 @@ export default function InputRange({ timePlan, changeTimePlan }) {
         max="1"
         defaultValue={timePlan === "Monthly" ? 0 : 1}
         onChange={(e) => {
-          changeTimePlan(e.target.value === 0 ? "Monthly" : "Yearly");
+          changeTimePlan(e.target.value === "0" ? "Monthly" : "Yearly");
         }}
       />
       <span

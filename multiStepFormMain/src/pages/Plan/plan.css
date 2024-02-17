@@ -15,9 +15,9 @@
 .planSection .buttonsContainer {
   flex-direction: row;
 }
-@media (min-width: 600px) {
-}
-@media (min-width: 1024px) {
-}
-@media (min-width: 2560px) {
+@media (min-width: 768px) {
+  .cardWrapper {
+    flex-direction: row;
+    gap: 15px;
+  }
 }

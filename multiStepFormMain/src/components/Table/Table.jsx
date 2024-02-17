@@ -21,7 +21,7 @@ export default function Table({ data }) {
             <span>
               {userData.planSelected.name}({userData.timePlan})
             </span>
-            <span>
+            <span className="backLink">
               <Link to="/plan">Change</Link>
             </span>
           </th>

@@ -26,9 +26,12 @@ th:nth-child(1) {
   align-items: flex-start;
   gap: 5px;
 }
-th:nth-child(1) a,
+.backLink a,
 td {
   color: var(--Cool-gray);
+}
+.backLink a:hover{
+  color:var(--Purplish-blue)
 }
 td {
   font-size: 0.85rem;
@@ -43,3 +46,12 @@ tbody tr td:nth-child(2) {
   color: var(--Cool-gray);
 }
 
+@media (min-width: 768px) {
+  th {
+    font-size: 0.8rem;
+  }
+  .backLink a, td {
+    
+    font-size: 0.75rem;
+}
+}

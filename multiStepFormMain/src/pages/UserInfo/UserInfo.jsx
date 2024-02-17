@@ -1,89 +1,93 @@
 /* eslint-disable react/prop-types */
-import "./userInfo.css";
+
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../Provider";
 import { Button } from "../../components/button/Button.jsx";
 import HeaderSection from "../../components/HeaderSection/HeaderSection";
 import Form from "../../components/Form/Form";
-import { checkValidity } from "../../Validator/Validator.js";
+import UserInput from "../../components/UserInput/UserInput.jsx";
+import {
+  emailValidate,
+  nameValidate,
+  phoneValidate,
+} from "../../Validator/Validator.js";
+import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 
 export default function UserInfo() {
-  const [nameValid, setNameValid] = useState({ isValid: true, text: "" });
-  const [emailValid, setEmailValid] = useState({ isValid: true, text: "" });
-  const [phoneValid, setPhoneValid] = useState({ isValid: true, text: "" });
-  const [isActive, setIsActive] = useState(false);
-
   const { userData, setNavIndex } = useContext(DataContext);
+
+  const [nameValidity, setNameValidity] = useState({
+    value: userData.userName.value,
+    isValid: userData.userName.isValid,
+    text: "",
+  });
+  const [emailValidity, setEmailValidity] = useState({
+    value: userData.userEmail.value,
+    isValid: userData.userEmail.isValid,
+    text: "",
+  });
+  const [phoneValidity, setPhoneValidity] = useState({
+    value: userData.userPhone.value,
+    isValid: userData.userPhone.isValid,
+    text: "",
+  });
+
+  const [isActive, setIsActive] = useState(true);
 
   const userInputData = [
     {
-      labelTitle: "name",
+      labelTitle: "Name",
       inputType: "text",
       inputName: "username",
+      defaultValue: nameValidity.value,
       inputPlaceholder: "e.g. Stephen king",
-      defaultValue: userData.userName,
-      changeHandle:(e) => userData.userName = e.target.value
+      helperText: nameValidity,
+      changeHandle: (e) => setNameValidity(nameValidate(e.target.value)),
     },
     {
       labelTitle: "Email Address",
       inputType: "email",
       inputName: "useremail",
+      defaultValue: emailValidity.value,
       inputPlaceholder: "e.g. stephenking@lorem.com",
-      defaultValue: userData.userEmail,
-      changeHandle:(e) => userData.userEmail = e.target.value
+      helperText: emailValidity,
+      changeHandle: (e) => setEmailValidity(emailValidate(e.target.value)),
     },
     {
       labelTitle: "Phone Number",
       inputType: "tel",
       inputName: "userphone",
+      defaultValue: phoneValidity.value,
       inputPlaceholder: "e.g. +1 234 567 890",
-      defaultValue: userData.userPhone,
-      changeHandle:(e) => userData.userPhone = e.target.value
+      helperText: phoneValidity,
+      changeHandle: (e) => setPhoneValidity(phoneValidate(e.target.value)),
     },
   ];
-  // function checkData() {
-  //   const  result  = checkValidity({ userName, userEmail, userPhone });
-  //   console.log(result);
-  //   setNameValid(result.nameValidity);
-  //   setEmailValid(result.emailValidity);
-  //   setPhoneValid(result.phoneValidity);
-  //   nameValid.isValid && emailValid.isValid && phoneValid.isValid
-  //     ? setIsActive(true)
-  //     : setIsActive(false);
-  // }
-  function UserInput({ element }) {
-    const {
-      labelTitle,
-      inputType,
-      inputName,
-      inputPlaceholder,
-      defaultValue,
-      changeHandle,
-    } = element;
-    return (
-      <div className="userInputWrapper">
-        <div className="labelWrapper">
-          <label htmlFor="username">{labelTitle}</label>
-          <span className="input-error">
-            {!nameValid.isValid && nameValid.text}
-          </span>
-        </div>
-        <input
-          type={inputType}
-          name={inputName}
-          id={inputName}
-          placeholder={inputPlaceholder}
-          defaultValue={defaultValue}
-          onChange={changeHandle}
-        />
-      </div>
-    );
-  }
 
   useEffect(() => {
     setNavIndex(0);
+    setIsActive(
+      nameValidity.isValid && emailValidity.isValid && phoneValidity.isValid
+        ? true
+        : false
+    );
   }, []);
-  
+
+  useEffect(() => {
+    userData.userName.value = nameValidity.value;
+    userData.userName.isValid = nameValidity.isValid;
+    userData.userEmail.value = emailValidity.value;
+    userData.userEmail.isValid = nameValidity.isValid;
+    userData.userPhone.value = phoneValidity.value;
+    userData.userPhone.isValid = phoneValidity.value;
+
+    setIsActive(
+      nameValidity.isValid && emailValidity.isValid && phoneValidity.isValid
+        ? true
+        : false
+    );
+  }, [nameValidity, emailValidity, phoneValidity]);
+
   return (
     <section className="userInfoSection">
       <div className="container">
@@ -95,39 +99,22 @@ export default function UserInfo() {
             }
           />
           <Form>
-            {/* <div className="userInputWrapper">
-              <div className="labelWrapper">
-                <label htmlFor="username">name</label>
-                <span className="input-error">
-                  {!nameValid.isValid && nameValid.text}
-                </span>
-              </div>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="e.g. Stephen king"
-                defaultValue={userName}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                className={!nameValid.isValid && "inputInvalid"}
-              />
-            </div> */}
             {userInputData.map((element, index) => (
               <UserInput element={element} key={index} />
             ))}
           </Form>
         </div>
       </div>
-      <div className="buttonsContainer">
+      <ButtonsContainer>
         <Button
-          url={"/plan"}
-          text={"Next Step"}
-          classNm={"btnNext"}
-          isActive={isActive}
+          data={{
+            url: isActive ? "/plan" : "#",
+            text: "Next Step",
+            classNm: "btnNext",
+            isActive: isActive,
+          }}
         />
-      </div>
+      </ButtonsContainer>
     </section>
   );
 }

@@ -10,11 +10,21 @@
 }
 .confirmSection .sectionTitle {
   margin-top: 25px;
-  
 }
-@media (min-width: 600px) {
-}
-@media (min-width: 1024px) {
-}
-@media (min-width: 2560px) {
+@media (min-width: 768px) {
+  .confirmSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .confirmSection .container {
+    padding: 0;
+    margin: 0;
+  }
+  .confirmSection img {
+    margin: 0 auto;
+    height: 65px;
+    width: 65px;
+  }
 }

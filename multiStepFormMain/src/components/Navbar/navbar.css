@@ -37,17 +37,51 @@
 .stepDescription {
   display: none;
 }
-@media (min-width: 600px) {
-}
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .navbarWrapper {
     background: url("../../assets/images/bg-sidebar-desktop.svg") no-repeat top
       left/cover;
+    height: 100%;
+    width: 200px;
+    border-radius: 10px;
+    padding-top: 0;
+  }
+  .mainNav {
+    height: 100%;
+    width: 100%;
+    padding: 30px 0 0 20px;
+  }
+  .mainNav ul {
+    list-style: none;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .mainNav .index {
+    height: 25px;
+    width: 25px;
+    line-height: 23px;
+  }
+  .mainNav ul li {
+    display: flex;
+    gap: 20px;
+  }
+  .mainNav ul li div {
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .stepNumber,
+  .stepDescription {
+    display: block;
+    letter-spacing: 2px;
   }
   .stepNumber {
+    font-size: 0.525rem;
+    color: var(--Pastel-blue);
   }
   .stepDescription {
+    font-size: 0.6rem;
+    color: var(--Alabaster);
+    font-weight: 700;
   }
-}
-@media (min-width: 2560px) {
 }

@@ -1,6 +1,3 @@
-.userInfoSection {
-}
-
 .userInputWrapper {
   display: flex;
   flex-direction: column;
@@ -13,7 +10,7 @@
 .input-error,
 .userInputWrapper label {
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 .userInputWrapper label {
   color: var(--Marine-blue);
@@ -30,6 +27,7 @@
   color: var(--Marine-blue);
   font-weight: 700;
   transition: all 0.2s ease-in;
+  cursor: pointer;
 }
 .userInputWrapper input:focus,
 .userInputWrapper input:active {
@@ -45,9 +43,15 @@
 .buttonsContainer {
   flex-direction: row-reverse;
 }
-@media (min-width: 600px) {
-}
-@media (min-width: 1024px) {
-}
-@media (min-width: 2560px) {
+@media (min-width: 768px) {
+  .userInputWrapper{
+    margin-top: 15px;
+  }
+  .input-error,
+  .userInputWrapper label {
+    font-size: 0.75rem;
+  }
+  .userInputWrapper input {
+    margin-top: 5px;
+  }
 }

@@ -2,6 +2,8 @@ import { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserInfo = lazy(() => import("./pages/UserInfo/UserInfo"));
 const Plan = lazy(() => import("./pages/Plan/Plan"));
@@ -12,6 +14,19 @@ const Confirm = lazy(() => import("./pages/Confirm/Confirm"));
 function App() {
   return (
     <main className="main">
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition:Bounce
+      />
       <Navbar />
       <Router>
         <Routes>

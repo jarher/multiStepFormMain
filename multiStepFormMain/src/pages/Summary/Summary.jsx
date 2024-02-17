@@ -4,6 +4,9 @@ import { Button } from "../../components/button/Button";
 import { DataContext } from "../../Provider";
 import Table from "../../components/Table/Table";
 import HeaderSection from "../../components/HeaderSection/HeaderSection";
+import ButtonsContainer from "../../components/button/ButtonsContainer";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Summary() {
   const { userData, setNavIndex } = useContext(DataContext);
@@ -21,8 +24,33 @@ export default function Summary() {
     userData.timePlan === "Monthly" ? "mo" : "yr"
   }`;
 
+  const navigate = useNavigate();
+
+  const buttons = [
+    {
+      url: "/addons",
+      text: "Go Back",
+      classNm: "btnPrev",
+      isActive: true,
+    },
+    {
+      url: "/confirm",
+      text: "Next Step",
+      classNm: "btnNext",
+      isActive: true,
+    },
+  ];
+
   useEffect(() => {
     setNavIndex(3);
+    if (
+      !userData.userName.isValid &&
+      !userData.userEmail.isValid &&
+      !userData.userPhone.isValid
+    ) {
+      toast("Please, fill the personal info form!");
+      navigate("/")
+    }
   }, []);
 
   return (
@@ -42,20 +70,11 @@ export default function Summary() {
           </div>
         </div>
       </div>
-      <div className="buttonsContainer">
-        <Button
-          url={"/addons"}
-          text={"Go Back"}
-          classNm={"btnPrev"}
-          isActive={true}
-        />
-        <Button
-          url={"/confirm"}
-          text={"Confirm"}
-          classNm={"btnConfirm"}
-          isActive={true}
-        />
-      </div>
+      <ButtonsContainer>
+        {buttons.map((props, i) => (
+          <Button data={props} key={i} />
+        ))}
+      </ButtonsContainer>
     </section>
   );
 }

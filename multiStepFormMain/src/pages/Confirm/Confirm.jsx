@@ -3,11 +3,24 @@ import thankyouIcon from "../../assets/images/icon-thank-you.svg";
 import HeaderSection from "../../components/HeaderSection/HeaderSection";
 import { useContext, useEffect } from "react";
 import { DataContext } from "../../Provider";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Confirm() {
-  const { setNavIndex } = useContext(DataContext);
+  const { userData, setNavIndex } = useContext(DataContext);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     setNavIndex(3);
+    if (
+      !userData.userName.isValid &&
+      !userData.userEmail.isValid &&
+      !userData.userPhone.isValid
+    ) {
+      toast("Please, fill the personal info form!");
+      navigate("/");
+    }
   }, []);
   return (
     <section className="confirmSection">
