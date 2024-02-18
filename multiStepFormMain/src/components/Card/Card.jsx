@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import "./Card.css";
 import { useContext } from "react";
-import { DataContext } from "../../Provider";
+import { DataContext } from "../../Providers/Provider";
 
 export default function Card({
   cardData,
@@ -13,7 +13,7 @@ export default function Card({
 }) {
   const { userData } = useContext(DataContext);
   const newPlan = dataPlan[index];
-  console.log(userData);
+  
   return (
     <div
       className={`card ${

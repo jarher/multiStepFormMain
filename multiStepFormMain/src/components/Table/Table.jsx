@@ -13,6 +13,7 @@ function Row({ data }) {
 
 export default function Table({ data }) {
   const { userData } = data;
+  
   return (
     <table className="summaryTable">
       <thead>
@@ -29,7 +30,7 @@ export default function Table({ data }) {
         </tr>
       </thead>
       <tbody>
-        {userData.addonsSelected
+        {userData.addonsSelected[userData.timePlan === "Monthly" ? 0 : 1]
           .filter((data) => data.isSelected === true)
           .map((data, i) => (
             <Row data={data} key={i} />

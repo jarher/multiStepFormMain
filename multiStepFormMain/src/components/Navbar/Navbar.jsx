@@ -1,6 +1,6 @@
 import "./navbar.css";
 import { useContext } from "react";
-import { DataContext } from "../../Provider";
+import { DataContext } from "../../Providers/Provider";
 
 export default function Navbar() {
   const { navbarIndex } = useContext(DataContext);

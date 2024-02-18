@@ -1,17 +1,16 @@
 /* eslint-disable react/prop-types */
-
 import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../../Provider";
+import { DataContext } from "../../Providers/Provider.jsx";
 import { Button } from "../../components/button/Button.jsx";
 import HeaderSection from "../../components/HeaderSection/HeaderSection";
 import Form from "../../components/Form/Form";
 import UserInput from "../../components/UserInput/UserInput.jsx";
+import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import {
   emailValidate,
   nameValidate,
   phoneValidate,
 } from "../../Validator/Validator.js";
-import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 
 export default function UserInfo() {
   const { userData, setNavIndex } = useContext(DataContext);
@@ -31,6 +30,7 @@ export default function UserInfo() {
     isValid: userData.userPhone.isValid,
     text: "",
   });
+  const [isVisible, setIsVisible] = useState(false);
 
   const [isActive, setIsActive] = useState(true);
 
@@ -71,6 +71,7 @@ export default function UserInfo() {
         ? true
         : false
     );
+    setIsVisible(true);
   }, []);
 
   useEffect(() => {
@@ -86,10 +87,11 @@ export default function UserInfo() {
         ? true
         : false
     );
+    localStorage.setItem("userData", JSON.stringify(userData));
   }, [nameValidity, emailValidity, phoneValidity]);
 
   return (
-    <section className="userInfoSection">
+    <section className={`userInfoSection ${!isVisible ? "noVisible" : ""}`}>
       <div className="container">
         <div className="formWrapper">
           <HeaderSection
@@ -111,6 +113,7 @@ export default function UserInfo() {
             url: isActive ? "/plan" : "#",
             text: "Next Step",
             classNm: "btnNext",
+            ariaText:"Go to plan section",
             isActive: isActive,
           }}
         />

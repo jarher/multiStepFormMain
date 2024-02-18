@@ -4,6 +4,7 @@ import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import UserStatesProvider from "./Providers/userStatesProvider.jsx";
 
 const UserInfo = lazy(() => import("./pages/UserInfo/UserInfo"));
 const Plan = lazy(() => import("./pages/Plan/Plan"));
@@ -29,48 +30,50 @@ function App() {
       />
       <Navbar />
       <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Suspense fallback={<></>}>
-                <UserInfo />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/plan"
-            element={
-              <Suspense fallback={<></>}>
-                <Plan />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/addons"
-            element={
-              <Suspense fallback={<></>}>
-                <AddOns />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/summary"
-            element={
-              <Suspense fallback={<></>}>
-                <Summary />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/confirm"
-            element={
-              <Suspense fallback={<></>}>
-                <Confirm />
-              </Suspense>
-            }
-          />
-        </Routes>
+        <UserStatesProvider>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<></>}>
+                  <UserInfo />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/plan"
+              element={
+                <Suspense fallback={<></>}>
+                  <Plan />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/addons"
+              element={
+                <Suspense fallback={<></>}>
+                  <AddOns />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/summary"
+              element={
+                <Suspense fallback={<></>}>
+                  <Summary />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/confirm"
+              element={
+                <Suspense fallback={<></>}>
+                  <Confirm />
+                </Suspense>
+              }
+            />
+          </Routes>
+        </UserStatesProvider>
       </Router>
     </main>
   );

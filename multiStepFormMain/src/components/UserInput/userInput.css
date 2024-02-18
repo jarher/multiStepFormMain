@@ -17,6 +17,7 @@
 }
 .input-error {
   color: var(--Strawberry-red);
+  text-align: right;
 }
 .userInputWrapper input {
   border: 1px solid var(--Light-gray);

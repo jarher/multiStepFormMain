@@ -1,29 +1,23 @@
 import "./confirm.css";
 import thankyouIcon from "../../assets/images/icon-thank-you.svg";
 import HeaderSection from "../../components/HeaderSection/HeaderSection";
-import { useContext, useEffect } from "react";
-import { DataContext } from "../../Provider";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useState, useContext, useEffect } from "react";
+import { DataContext } from "../../Providers/Provider";
+import { UserStatesContext } from "../../Providers/userStatesProvider";
 
 export default function Confirm() {
-  const { userData, setNavIndex } = useContext(DataContext);
-
-  const navigate = useNavigate();
+  const { setNavIndex } = useContext(DataContext);
+  const { isFilledForm } = useContext(UserStatesContext);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setNavIndex(3);
-    if (
-      !userData.userName.isValid &&
-      !userData.userEmail.isValid &&
-      !userData.userPhone.isValid
-    ) {
-      toast("Please, fill the personal info form!");
-      navigate("/");
-    }
+    isFilledForm();
+    setIsVisible(true);
   }, []);
+
   return (
-    <section className="confirmSection">
+    <section className={`confirmSection ${!isVisible ? "noVisible" : ""}`}>
       <div className="container">
         <img src={thankyouIcon} alt="thank you icon" />
         <HeaderSection

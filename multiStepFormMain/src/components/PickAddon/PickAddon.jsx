@@ -2,16 +2,21 @@
 /* eslint-disable react/prop-types */
 import "./pickAddon.css";
 import { useContext, useState } from "react";
-import { DataContext } from "../../Provider";
+import { DataContext } from "../../Providers/Provider";
 
 export default function PickAddon({ addon, index, setIsActive, isChecked }) {
   const { userData } = useContext(DataContext);
   const [isSelected, setIsSelected] = useState(false);
 
+  function getAddons(firstIndex, secondIndex) {
+    return userData.addonsSelected[firstIndex][secondIndex];
+  }
   return (
     <div
       className={`pickWrapper ${
-        isSelected || userData.addonsSelected[index].isSelected
+        isSelected ||
+        getAddons(0, index).isSelected ||
+        getAddons(1, index).isSelected
           ? "elementSelected"
           : ""
       }`}
@@ -20,10 +25,15 @@ export default function PickAddon({ addon, index, setIsActive, isChecked }) {
         type="checkbox"
         name={`pickAddon${index}`}
         id={`pickAddon${index}`}
-        defaultChecked={userData.addonsSelected[index].isSelected}
+        defaultChecked={
+          getAddons(0, index).isSelected || getAddons(1, index).isSelected
+        }
         onClick={(e) => {
-          userData.addonsSelected[index].isSelected = e.target.checked;
-          setIsActive(isChecked(userData.addonsSelected));
+          getAddons(0, index).isSelected = e.target.checked;
+          getAddons(1, index).isSelected = e.target.checked;
+          setIsActive(
+            isChecked(userData.addonsSelected[0] && userData.addonsSelected[0])
+          );
           setIsSelected(e.target.checked);
         }}
       />

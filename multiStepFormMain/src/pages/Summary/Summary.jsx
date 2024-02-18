@@ -1,60 +1,45 @@
 import "./summary.css";
-import { useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Button } from "../../components/button/Button";
-import { DataContext } from "../../Provider";
+import { DataContext } from "../../Providers/Provider";
 import Table from "../../components/Table/Table";
 import HeaderSection from "../../components/HeaderSection/HeaderSection";
 import ButtonsContainer from "../../components/button/ButtonsContainer";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { UserStatesContext } from "../../Providers/userStatesProvider";
+import totalCalculator from "../../utils/calculator";
 
 export default function Summary() {
   const { userData, setNavIndex } = useContext(DataContext);
+  const { isFilledForm } = useContext(UserStatesContext);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const planPrice = Number.parseInt(
-    userData.planSelected.price.replace(/[+$/a-z^d]/g, "")
-  );
-
-  const addonPrice = userData.addonsSelected
-    .filter((addon) => addon.isSelected === true)
-    .map((addon) => Number.parseInt(addon.price.replace(/[+$/a-z^d]/g, "")))
-    .reduce((acc, currentPrice) => acc + currentPrice, 0);
-
-  const total = `$${planPrice + addonPrice}/${
-    userData.timePlan === "Monthly" ? "mo" : "yr"
-  }`;
-
-  const navigate = useNavigate();
+  const total = totalCalculator(userData);
 
   const buttons = [
     {
       url: "/addons",
       text: "Go Back",
       classNm: "btnPrev",
+      ariaText: "Return to add-ons section",
       isActive: true,
     },
     {
       url: "/confirm",
       text: "Next Step",
       classNm: "btnNext",
+      ariaText: "Go to confirm section",
       isActive: true,
     },
   ];
 
   useEffect(() => {
     setNavIndex(3);
-    if (
-      !userData.userName.isValid &&
-      !userData.userEmail.isValid &&
-      !userData.userPhone.isValid
-    ) {
-      toast("Please, fill the personal info form!");
-      navigate("/")
-    }
+    isFilledForm();
+    setIsVisible(true);
   }, []);
 
   return (
-    <section className="summarySection">
+    <section className={`summarySection ${!isVisible ? "noVisible" : ""}`}>
       <div className="container">
         <div className="summaryWrapper">
           <HeaderSection

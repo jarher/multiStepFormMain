@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect } from "react";
 import "./InputRange.css";
-import { DataContext } from "../../Provider";
+import { DataContext } from "../../Providers/Provider";
 
 export default function InputRange({ timePlan, changeTimePlan }) {
   const { userData, data } = useContext(DataContext);
@@ -17,8 +17,6 @@ export default function InputRange({ timePlan, changeTimePlan }) {
     userData.planSelected.isSelected = true;
     
   }, [timePlan]);
-
-  console.log(userData);
 
   return (
     <div className="inputWrapper">
