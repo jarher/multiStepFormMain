@@ -1,7 +1,7 @@
 
 import { useState } from "react";
-import { emailValidate, nameValidate, phoneValidate } from "./Validator";
-
+import { emailValidate, nameValidate, phoneValidate } from "./Validator.js";
+//validate inputs from user info form.
 export default function UserInfoValidate(userData) {
   const [nameValidity, setNameValidity] = useState({
     value: userData.userName.value,

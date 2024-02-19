@@ -12,6 +12,7 @@ import pageTransition from "../../utils/pageTransition.js";
 export default function AddOns() {
   const { userData, setNavIndex } = useContext(DataContext);
   const { isFilledForm } = useContext(UserStatesContext);
+  
   const [addonsIndex, setAddonsIndex] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
