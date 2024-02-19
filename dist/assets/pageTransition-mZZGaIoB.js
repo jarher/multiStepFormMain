@@ -1,0 +1,1 @@
+import{j as e}from"./index-O0L1SJXi.js";function n({title:s,description:t}){return e.jsxs(e.Fragment,{children:[e.jsx("h1",{className:"sectionTitle",children:s}),e.jsx("p",{className:"sectionDescription",children:t})]})}function r(s){setTimeout(()=>s(!0),300)}export{n as H,r as p};
