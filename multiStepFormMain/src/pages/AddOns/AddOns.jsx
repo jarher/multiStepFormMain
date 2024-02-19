@@ -7,6 +7,7 @@ import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import { UserStatesContext } from "../../Providers/userStatesProvider";
 import getAddons from "../../utils/getAddons.js";
 import isChecked from "../../utils/isChecked.js";
+import pageTransition from "../../utils/pageTransition.js";
 
 export default function AddOns() {
   const { userData, setNavIndex } = useContext(DataContext);
@@ -119,8 +120,8 @@ export default function AddOns() {
       isChecked(userData.addonsSelected[0] && userData.addonsSelected[1])
     );
     isFilledForm();
-    setIsVisible(true);
     setAddonsIndex(userData.timePlan === "Monthly" ? 0 : 1);
+    pageTransition(setIsVisible);
   }, []);
 
   useEffect(() => {

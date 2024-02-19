@@ -4,6 +4,7 @@ import HeaderSection from "../../components/HeaderSection/HeaderSection";
 import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../../Providers/Provider";
 import { UserStatesContext } from "../../Providers/userStatesProvider";
+import pageTransition from "../../utils/pageTransition";
 
 export default function Confirm() {
   const { setNavIndex } = useContext(DataContext);
@@ -13,7 +14,7 @@ export default function Confirm() {
   useEffect(() => {
     setNavIndex(3);
     isFilledForm();
-    setIsVisible(true);
+    pageTransition(setIsVisible);
   }, []);
 
   return (

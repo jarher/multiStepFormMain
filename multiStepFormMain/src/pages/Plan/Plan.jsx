@@ -6,6 +6,7 @@ import HeaderSection from "../../components/HeaderSection/HeaderSection.jsx";
 import InputRange from "../../components/InputRange/InputRange.jsx";
 import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import { UserStatesContext } from "../../Providers/userStatesProvider.jsx";
+import pageTransition from "../../utils/pageTransition.js";
 
 export default function Plan() {
   const { userData, data, setNavIndex } = useContext(DataContext);
@@ -37,7 +38,7 @@ export default function Plan() {
   useEffect(() => {
     setNavIndex(1);
     isFilledForm();
-    setIsVisible(true);
+    pageTransition(setIsVisible);
   }, []);
 
   useEffect(() => {

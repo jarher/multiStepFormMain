@@ -30,8 +30,8 @@ th:nth-child(1) {
 td {
   color: var(--Cool-gray);
 }
-.backLink a:hover{
-  color:var(--Purplish-blue)
+.backLink a:hover {
+  color: var(--Purplish-blue);
 }
 td {
   font-size: 0.85rem;
@@ -50,8 +50,8 @@ tbody tr td:nth-child(2) {
   th {
     font-size: 0.8rem;
   }
-  .backLink a, td {
-    
+  .backLink a,
+  td {
     font-size: 0.75rem;
-}
+  }
 }

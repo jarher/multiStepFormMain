@@ -1,18 +1,19 @@
 import "./summary.css";
-import { useState, useContext, useEffect, useMemo } from "react";
+import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../../Providers/Provider";
 import Table from "../../components/Table/Table";
 import HeaderSection from "../../components/HeaderSection/HeaderSection";
 import ButtonsContainer from "../../components/button/ButtonsContainer";
 import { UserStatesContext } from "../../Providers/userStatesProvider";
 import totalCalculator from "../../utils/calculator";
+import pageTransition from "../../utils/pageTransition";
 
 export default function Summary() {
   const { userData, setNavIndex } = useContext(DataContext);
   const { isFilledForm } = useContext(UserStatesContext);
   const [isVisible, setIsVisible] = useState(false);
 
-  const total = useMemo(() => totalCalculator(userData));
+  const total = totalCalculator(userData);
 
   const buttons = [
     {
@@ -34,7 +35,7 @@ export default function Summary() {
   useEffect(() => {
     setNavIndex(3);
     isFilledForm();
-    setIsVisible(true);
+    pageTransition(setIsVisible);
   }, []);
 
   return (

@@ -6,6 +6,7 @@ import HeaderSection from "../../components/HeaderSection/HeaderSection";
 import Form from "../../components/Form/Form";
 import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import userInfoValidate from "../../Validator/userInfoValidate.js";
+import pageTransition from "../../utils/pageTransition.js";
 
 export default function UserInfo() {
   const { userData, setNavIndex } = useContext(DataContext);
@@ -74,7 +75,7 @@ export default function UserInfo() {
         ? true
         : false
     );
-    setIsVisible(true);
+    pageTransition(setIsVisible);
   }, []);
 
   useEffect(() => {
