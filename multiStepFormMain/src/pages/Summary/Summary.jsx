@@ -1,6 +1,5 @@
 import "./summary.css";
-import { useState, useContext, useEffect } from "react";
-import { Button } from "../../components/button/Button";
+import { useState, useContext, useEffect, useMemo } from "react";
 import { DataContext } from "../../Providers/Provider";
 import Table from "../../components/Table/Table";
 import HeaderSection from "../../components/HeaderSection/HeaderSection";
@@ -13,7 +12,7 @@ export default function Summary() {
   const { isFilledForm } = useContext(UserStatesContext);
   const [isVisible, setIsVisible] = useState(false);
 
-  const total = totalCalculator(userData);
+  const total = useMemo(() => totalCalculator(userData));
 
   const buttons = [
     {
@@ -55,11 +54,7 @@ export default function Summary() {
           </div>
         </div>
       </div>
-      <ButtonsContainer>
-        {buttons.map((props, i) => (
-          <Button data={props} key={i} />
-        ))}
-      </ButtonsContainer>
+      <ButtonsContainer data={buttons} />
     </section>
   );
 }

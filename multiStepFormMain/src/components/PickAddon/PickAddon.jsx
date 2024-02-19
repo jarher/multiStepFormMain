@@ -4,7 +4,13 @@ import "./pickAddon.css";
 import { useContext, useState } from "react";
 import { DataContext } from "../../Providers/Provider";
 
-export default function PickAddon({ addon, index, setIsActive, isChecked }) {
+export default function PickAddon({
+  addon,
+  index,
+  setIsActive,
+  isChecked,
+  ariaText,
+}) {
   const { userData } = useContext(DataContext);
   const [isSelected, setIsSelected] = useState(false);
 
@@ -20,6 +26,7 @@ export default function PickAddon({ addon, index, setIsActive, isChecked }) {
           ? "elementSelected"
           : ""
       }`}
+      aria-label={addon.ariaText}
     >
       <input
         type="checkbox"

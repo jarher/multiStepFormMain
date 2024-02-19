@@ -1,66 +1,63 @@
 /* eslint-disable react/prop-types */
+import "./userInfo.css";
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../Providers/Provider.jsx";
-import { Button } from "../../components/button/Button.jsx";
 import HeaderSection from "../../components/HeaderSection/HeaderSection";
 import Form from "../../components/Form/Form";
-import UserInput from "../../components/UserInput/UserInput.jsx";
 import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
-import {
-  emailValidate,
-  nameValidate,
-  phoneValidate,
-} from "../../Validator/Validator.js";
+import userInfoValidate from "../../Validator/userInfoValidate.js";
 
 export default function UserInfo() {
   const { userData, setNavIndex } = useContext(DataContext);
-
-  const [nameValidity, setNameValidity] = useState({
-    value: userData.userName.value,
-    isValid: userData.userName.isValid,
-    text: "",
-  });
-  const [emailValidity, setEmailValidity] = useState({
-    value: userData.userEmail.value,
-    isValid: userData.userEmail.isValid,
-    text: "",
-  });
-  const [phoneValidity, setPhoneValidity] = useState({
-    value: userData.userPhone.value,
-    isValid: userData.userPhone.isValid,
-    text: "",
-  });
+  const {
+    nameValidation,
+    emailValidation,
+    phoneValidation,
+    nameValidity,
+    emailValidity,
+    phoneValidity,
+  } = userInfoValidate(userData);
+  
   const [isVisible, setIsVisible] = useState(false);
 
   const [isActive, setIsActive] = useState(true);
 
   const userInputData = [
     {
-      labelTitle: "Name",
-      inputType: "text",
-      inputName: "username",
+      nameClass: "userInfoWrapper",
+      type: "text",
+      name: "username",
+      id: "username",
+      labelText: "Name",
+      isLegend: false,
       defaultValue: nameValidity.value,
-      inputPlaceholder: "e.g. Stephen king",
+      placeholder: "e.g. Stephen king",
       helperText: nameValidity,
-      changeHandle: (e) => setNameValidity(nameValidate(e.target.value)),
+      changeHandle: (e) => nameValidation(e.target.value),
     },
     {
-      labelTitle: "Email Address",
-      inputType: "email",
-      inputName: "useremail",
+      nameClass: "userInfoWrapper",
+      type: "email",
+      name: "useremail",
+      id: "username",
+      labelText: "Email Address",
+      isLegend: false,
       defaultValue: emailValidity.value,
-      inputPlaceholder: "e.g. stephenking@lorem.com",
+      placeholder: "e.g. stephenking@lorem.com",
       helperText: emailValidity,
-      changeHandle: (e) => setEmailValidity(emailValidate(e.target.value)),
+      changeHandle: (e) => emailValidation(e.target.value),
     },
     {
-      labelTitle: "Phone Number",
-      inputType: "tel",
-      inputName: "userphone",
+      nameClass: "userInfoWrapper",
+      type: "tel",
+      name: "userphone",
+      id: "username",
+      labelText: "Phone Number",
+      isLegend: false,
       defaultValue: phoneValidity.value,
-      inputPlaceholder: "e.g. +1 234 567 890",
+      placeholder: "e.g. +1 234 567 890",
       helperText: phoneValidity,
-      changeHandle: (e) => setPhoneValidity(phoneValidate(e.target.value)),
+      changeHandle: (e) => phoneValidation(e.target.value),
     },
   ];
 
@@ -93,31 +90,25 @@ export default function UserInfo() {
   return (
     <section className={`userInfoSection ${!isVisible ? "noVisible" : ""}`}>
       <div className="container">
-        <div className="formWrapper">
-          <HeaderSection
-            title={"Personal info"}
-            description={
-              " Please provide your name, email address, and phone number."
-            }
-          />
-          <Form>
-            {userInputData.map((element, index) => (
-              <UserInput element={element} key={index} />
-            ))}
-          </Form>
-        </div>
+        <HeaderSection
+          title={"Personal info"}
+          description={
+            " Please provide your name, email address, and phone number."
+          }
+        />
+        <Form data={userInputData} />
       </div>
-      <ButtonsContainer>
-        <Button
-          data={{
+      <ButtonsContainer
+        data={[
+          {
             url: isActive ? "/plan" : "#",
             text: "Next Step",
             classNm: "btnNext",
-            ariaText:"Go to plan section",
+            ariaText: "Go to plan section",
             isActive: isActive,
-          }}
-        />
-      </ButtonsContainer>
+          },
+        ]}
+      />
     </section>
   );
 }

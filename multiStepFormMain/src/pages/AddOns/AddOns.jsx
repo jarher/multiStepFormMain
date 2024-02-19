@@ -1,6 +1,5 @@
 import "./addons.css";
 import { useContext, useEffect, useState } from "react";
-import { Button } from "../../components/button/Button.jsx";
 import { DataContext } from "../../Providers/Provider.jsx";
 import PickAddon from "../../components/PickAddon/PickAddon.jsx";
 import HeaderSection from "../../components/HeaderSection/HeaderSection.jsx";
@@ -49,7 +48,6 @@ export default function AddOns() {
     localStorage.setItem("userData", JSON.stringify(userData));
   }, [isActive]);
 
-  console.log(userData);
   return (
     <section className={`addonsSection ${!isVisible ? "noVisible" : ""}`}>
       <div className="container">
@@ -69,11 +67,7 @@ export default function AddOns() {
           ))}
         </Form>
       </div>
-      <ButtonsContainer>
-        {buttons.map((props, i) => (
-          <Button data={props} key={i} />
-        ))}
-      </ButtonsContainer>
+      <ButtonsContainer data={buttons} />
     </section>
   );
 }

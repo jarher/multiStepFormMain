@@ -4,7 +4,6 @@ import { DataContext } from "../../Providers/Provider.jsx";
 import Card from "../../components/Card/Card.jsx";
 import HeaderSection from "../../components/HeaderSection/HeaderSection.jsx";
 import Form from "../../components/Form/Form.jsx";
-import { Button } from "../../components/button/Button.jsx";
 import InputRange from "../../components/InputRange/InputRange.jsx";
 import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import { UserStatesContext } from "../../Providers/userStatesProvider.jsx";
@@ -72,11 +71,7 @@ export default function Plan() {
           <InputRange timePlan={timePlan} changeTimePlan={changeTimePlan} />
         </Form>
       </div>
-      <ButtonsContainer>
-        {buttons.map((props, i) => (
-          <Button data={props} key={i} />
-        ))}
-      </ButtonsContainer>
+      <ButtonsContainer data={buttons} />
     </section>
   );
 }
