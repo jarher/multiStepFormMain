@@ -7,15 +7,19 @@ export default function InputWrapper({ data }) {
     name,
     id,
     labelText,
+    ariaText,
     isLegend,
     defaultValue,
+    defaultChecked,
     placeholder,
     legend,
     helperText,
-    changeHandle,
+    onChange,
+    onClick,
+    onBlur
   } = data;
   return (
-    <fieldset className={`inputWrapper ${nameClass}`}>
+    <fieldset className={`inputWrapper ${nameClass}`} aria-label={ariaText}>
       <label>
         <span>{labelText}</span>
         {!helperText.isValid && (
@@ -24,8 +28,8 @@ export default function InputWrapper({ data }) {
       </label>
       {isLegend && (
         <legend>
-          <span>{`${legend.description}`}</span>
-          <span>${legend.price}</span>
+          <span>{legend.description}</span>
+          <span>{legend.price}</span>
         </legend>
       )}
       <input
@@ -34,8 +38,10 @@ export default function InputWrapper({ data }) {
         id={id}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        onChange={changeHandle}
-        onBlur={changeHandle}
+        onChange={onChange}
+        onClick={onClick}
+        onBlur={onBlur}
+        defaultChecked={defaultChecked}
         className={!helperText.isValid ? "userInfoWrapper--inputInvalid" : ""}
         required
       />

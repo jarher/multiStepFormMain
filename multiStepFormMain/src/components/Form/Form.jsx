@@ -1,7 +1,5 @@
-import InputWrapper from "../InputWrapper/InputWrapper";
-
 /* eslint-disable react/prop-types */
-
+import InputWrapper from "../InputWrapper/InputWrapper";
 
 export default function Form(props) {
   const {data} = props;

@@ -3,10 +3,12 @@
   margin-top: 15px;
   display: flex;
   flex-direction: column;
-  height: 75px;
+  height: 65px;
   flex-wrap: wrap;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  position: relative;
+  padding: 0 10px;
 }
 .input-error,
 .inputWrapper label {
@@ -58,14 +60,38 @@
 .userInfoWrapper--inputInvalid {
   border-color: var(--Strawberry-red) !important;
 }
+.addonsWrapper {
+  justify-content: center;
+  border: 1px solid var(--Light-gray);
+}
 .addonsWrapper:hover {
   border-color: var(--Purplish-blue) !important;
+}
+.addonsWrapper legend,
+.addonsWrapper label {
+  position: absolute;
+  width: 83%;
+  right: 0;
+}
+.addonsWrapper label {
+  top: 15px;
+}
+.addonsWrapper legend {
+  bottom: 0;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .addonsWrapper legend span:nth-child(2) {
   font-size: 0.75rem;
   color: var(--Purplish-blue);
   font-weight: 500;
+  position: absolute;
+  top: 0;
+  right: 15px;
 }
+
 .addonsWrapper input {
   width: 20px;
   height: 20px;
@@ -75,7 +101,7 @@
   text-align: right;
 }
 @media (min-width: 768px) {
-  .userInputWrapper{
+  .userInputWrapper {
     margin-top: 15px;
   }
   .input-error,

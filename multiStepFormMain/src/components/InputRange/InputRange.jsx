@@ -19,7 +19,7 @@ export default function InputRange({ timePlan, changeTimePlan }) {
   }, [timePlan]);
 
   return (
-    <div className="inputWrapper">
+    <form className="inputRangeWrapper">
       <span
         className={`planName ${timePlan === "Monthly" ? "planSelected" : ""}`}
       >
@@ -31,6 +31,9 @@ export default function InputRange({ timePlan, changeTimePlan }) {
         id="switchPlanInput"
         min="0"
         max="1"
+        aria-valuemax={1}
+        aria-valuemin={0}
+        aria-valuenow={0}
         defaultValue={timePlan === "Monthly" ? 0 : 1}
         onChange={(e) => {
           changeTimePlan(e.target.value === "0" ? "Monthly" : "Yearly");
@@ -41,6 +44,6 @@ export default function InputRange({ timePlan, changeTimePlan }) {
       >
         Yearly
       </span>
-    </div>
+    </form>
   );
 }

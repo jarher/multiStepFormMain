@@ -1,21 +1,100 @@
 import "./addons.css";
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../Providers/Provider.jsx";
-import PickAddon from "../../components/PickAddon/PickAddon.jsx";
 import HeaderSection from "../../components/HeaderSection/HeaderSection.jsx";
 import Form from "../../components/Form/Form.jsx";
 import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import { UserStatesContext } from "../../Providers/userStatesProvider";
+import getAddons from "../../utils/getAddons.js";
+import isChecked from "../../utils/isChecked.js";
 
-function isChecked(array) {
-  return array.some((element) => element.isSelected);
-}
 export default function AddOns() {
   const { userData, setNavIndex } = useContext(DataContext);
   const { isFilledForm } = useContext(UserStatesContext);
   const [addonsIndex, setAddonsIndex] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isChk01, setIsChk01] = useState(
+    getAddons(userData, addonsIndex, 0).isSelected
+  );
+  const [isChk02, setIsChk02] = useState(
+    getAddons(userData, addonsIndex, 1).isSelected
+  );
+  const [isChk03, setIsChk03] = useState(
+    getAddons(userData, addonsIndex, 2).isSelected
+  );
+
+  const userInputData = [
+    {
+      nameClass: `addonsWrapper ${isChk01 ? "elementSelected" : ""}`,
+      type: "checkbox",
+      name: "checkbox1",
+      id: "checkbox1",
+      labelText: getAddons(userData, addonsIndex, 0).name,
+      ariaText: getAddons(userData, addonsIndex, 0).ariaText,
+      isLegend: true,
+      legend: {
+        description: getAddons(userData, addonsIndex, 0).description,
+        price: getAddons(userData, addonsIndex, 0).price,
+      },
+      defaultChecked: getAddons(userData, addonsIndex, 0).isSelected,
+      helperText: { isValid: false },
+      onClick: (e) => {
+        getAddons(userData, 0, 0).isSelected = e.target.checked;
+        getAddons(userData, 1, 0).isSelected = e.target.checked;
+        setIsActive(
+          isChecked(userData.addonsSelected[0] && userData.addonsSelected[1])
+        );
+        setIsChk01(e.target.checked);
+      },
+    },
+    {
+      nameClass: `addonsWrapper ${isChk02 ? "elementSelected" : ""}`,
+      type: "checkbox",
+      name: "checkbox2",
+      id: "chekcbox2",
+      labelText: getAddons(userData, addonsIndex, 1).name,
+      ariaText: getAddons(userData, addonsIndex, 1).ariaText,
+      isLegend: true,
+      legend: {
+        description: getAddons(userData, addonsIndex, 1).description,
+        price: getAddons(userData, addonsIndex, 1).price,
+      },
+      defaultChecked: getAddons(userData, addonsIndex, 1).isSelected,
+      helperText: { isValid: false },
+      onClick: (e) => {
+        getAddons(userData, 0, 1).isSelected = e.target.checked;
+        getAddons(userData, 1, 1).isSelected = e.target.checked;
+        setIsActive(
+          isChecked(userData.addonsSelected[0] && userData.addonsSelected[1])
+        );
+        setIsChk02(e.target.checked);
+      },
+    },
+    {
+      nameClass: `addonsWrapper ${isChk03 ? "elementSelected" : ""}`,
+      type: "checkbox",
+      name: "checkbox3",
+      id: "username",
+      labelText: getAddons(userData, addonsIndex, 2).name,
+      ariaText: getAddons(userData, addonsIndex, 2).ariaText,
+      isLegend: true,
+      legend: {
+        description: getAddons(userData, addonsIndex, 2).description,
+        price: getAddons(userData, addonsIndex, 2).price,
+      },
+      defaultChecked: getAddons(userData, addonsIndex, 2).isSelected,
+      helperText: { isValid: false },
+      onClick: (e) => {
+        getAddons(userData, 0, 2).isSelected = e.target.checked;
+        getAddons(userData, 1, 2).isSelected = e.target.checked;
+        setIsActive(
+          isChecked(userData.addonsSelected[0] && userData.addonsSelected[1])
+        );
+        setIsChk03(e.target.checked);
+      },
+    },
+  ];
 
   const buttons = [
     {
@@ -55,17 +134,7 @@ export default function AddOns() {
           title={"Pick add-ons"}
           description={"Add-ons help enhance gamin experience."}
         />
-        <Form>
-          {userData.addonsSelected[addonsIndex].map((addon, index) => (
-            <PickAddon
-              addon={addon}
-              index={index}
-              setIsActive={setIsActive}
-              isChecked={isChecked}
-              key={index}
-            />
-          ))}
-        </Form>
+        <Form data={userInputData} />
       </div>
       <ButtonsContainer data={buttons} />
     </section>

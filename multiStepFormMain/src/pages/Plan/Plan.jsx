@@ -3,7 +3,6 @@ import { useContext, useState, useEffect } from "react";
 import { DataContext } from "../../Providers/Provider.jsx";
 import Card from "../../components/Card/Card.jsx";
 import HeaderSection from "../../components/HeaderSection/HeaderSection.jsx";
-import Form from "../../components/Form/Form.jsx";
 import InputRange from "../../components/InputRange/InputRange.jsx";
 import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import { UserStatesContext } from "../../Providers/userStatesProvider.jsx";
@@ -67,9 +66,7 @@ export default function Plan() {
             />
           ))}
         </div>
-        <Form>
-          <InputRange timePlan={timePlan} changeTimePlan={changeTimePlan} />
-        </Form>
+        <InputRange timePlan={timePlan} changeTimePlan={changeTimePlan} />
       </div>
       <ButtonsContainer data={buttons} />
     </section>
