@@ -73,4 +73,12 @@ section {
   section {
     padding: 0 65px;
   }
+  .main {
+    padding: 10px;
+    flex-direction: row;
+    width: 775px;
+    height: 535px;
+    background-color: var(--White);
+    border-radius: 10px;
+  }
 }
