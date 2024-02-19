@@ -40,8 +40,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://github.com/jarher/multiStepFormMain]
+- Live Site URL: [https://multi-step-form-main-96y1.vercel.app/]
 
 ## My process
 
