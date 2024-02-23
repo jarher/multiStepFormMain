@@ -40,7 +40,6 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [https://github.com/jarher/multiStepFormMain]
 - Live Site URL: [https://multi-step-form-main-96y1.vercel.app/]
 
 ## My process
