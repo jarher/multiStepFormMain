@@ -8,6 +8,7 @@ import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import userInfoValidate from "../../Validator/userInfoValidate.js";
 import pageTransition from "../../utils/pageTransition.js";
 import saveInLocalStorage from "../../utils/saveLocally.js";
+import isChecked from "../../utils/isChecked.js";
 
 function asignValues(userInfo, validity) {
   userInfo.forEach((element, index) => {
@@ -30,58 +31,53 @@ export default function UserInfo() {
 
   const [isActive, setIsActive] = useState(true);
 
-  const userInputData = [
+  const userInfo = [
     {
-      nameClass: "userInfoWrapper",
       type: "text",
       name: "username",
-      id: "username",
       labelText: "Name",
       ariaText: "write your name",
-      isLegend: false,
-      defaultValue: nameValidity.value,
+      validities: [nameValidity, nameValidation],
       placeholder: "e.g. Stephen king",
-      helperText: nameValidity,
-      onChange: (e) => nameValidation(e.target.value),
-      onBlur: null,
     },
     {
-      nameClass: "userInfoWrapper",
       type: "email",
       name: "useremail",
-      id: "useremail",
       labelText: "Email Address",
       ariaText: "write your Email Address",
-      isLegend: false,
-      defaultValue: emailValidity.value,
+      validities: [emailValidity, emailValidation],
       placeholder: "e.g. stephenking@lorem.com",
-      helperText: emailValidity,
-      onChange: (e) => emailValidation(e.target.value),
-      onBlur: null,
     },
     {
-      nameClass: "userInfoWrapper",
       type: "tel",
       name: "userphone",
-      id: "userphone",
       labelText: "Phone Number",
       ariaText: "write your Phone Number",
-      isLegend: false,
-      defaultValue: phoneValidity.value,
+      validities: [phoneValidity, phoneValidation],
       placeholder: "e.g. +1 234 567 890",
-      helperText: phoneValidity,
-      onChange: (e) => phoneValidation(e.target.value),
-      onBlur: null,
     },
   ];
 
+  const userInputData = userInfo.map((info) => {
+    return {
+      nameClass: "userInfoWrapper",
+      type: info.type,
+      name: info.name,
+      id: info.name,
+      labelText: info.labelText,
+      ariaText: info.ariaText,
+      isLegend: false,
+      defaultValue: info.validities[0].value,
+      placeholder: info.placeholder,
+      helperText: info.validities[0],
+      onChange: (e) => info.validities[1](e.target.value),
+      onBlur: null,
+    };
+  });
+
   useEffect(() => {
     setNavIndex(0);
-    setIsActive(
-      nameValidity.isValid && emailValidity.isValid && phoneValidity.isValid
-        ? true
-        : false
-    );
+    setIsActive(isChecked([nameValidity, emailValidity, phoneValidity]));
     pageTransition(setIsVisible);
   }, []);
 
@@ -91,11 +87,7 @@ export default function UserInfo() {
       [nameValidity, emailValidity, phoneValidity]
     );
 
-    setIsActive(
-      nameValidity.isValid && emailValidity.isValid && phoneValidity.isValid
-        ? true
-        : false
-    );
+    setIsActive(isChecked([nameValidity, emailValidity, phoneValidity]));
     saveInLocalStorage(userData);
   }, [nameValidity, emailValidity, phoneValidity]);
 
