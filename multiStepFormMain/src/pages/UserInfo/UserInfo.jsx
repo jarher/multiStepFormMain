@@ -7,7 +7,14 @@ import Form from "../../components/Form/Form";
 import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import userInfoValidate from "../../Validator/userInfoValidate.js";
 import pageTransition from "../../utils/pageTransition.js";
+import saveInLocalStorage from "../../utils/saveLocally.js";
 
+function asignValues(userInfo, validity) {
+  userInfo.forEach((element, index) => {
+    element.value = validity[index].value;
+    element.isValid = validity[index].isValid;
+  });
+}
 export default function UserInfo() {
   const { userData, setNavIndex } = useContext(DataContext);
   const {
@@ -18,7 +25,7 @@ export default function UserInfo() {
     emailValidity,
     phoneValidity,
   } = userInfoValidate(userData);
-  
+
   const [isVisible, setIsVisible] = useState(false);
 
   const [isActive, setIsActive] = useState(true);
@@ -79,19 +86,17 @@ export default function UserInfo() {
   }, []);
 
   useEffect(() => {
-    userData.userName.value = nameValidity.value;
-    userData.userName.isValid = nameValidity.isValid;
-    userData.userEmail.value = emailValidity.value;
-    userData.userEmail.isValid = nameValidity.isValid;
-    userData.userPhone.value = phoneValidity.value;
-    userData.userPhone.isValid = phoneValidity.value;
+    asignValues(
+      [userData.userName, userData.userEmail, userData.userPhone],
+      [nameValidity, emailValidity, phoneValidity]
+    );
 
     setIsActive(
       nameValidity.isValid && emailValidity.isValid && phoneValidity.isValid
         ? true
         : false
     );
-    localStorage.setItem("userData", JSON.stringify(userData));
+    saveInLocalStorage(userData);
   }, [nameValidity, emailValidity, phoneValidity]);
 
   return (

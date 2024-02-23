@@ -20,8 +20,7 @@ export default function UserStatesProvider({ children }) {
       toast("Please, fill the personal info form first!");
       navigate("/");
     }
-    if(!isChecked(userData.addonsSelected[0]) ||
-      !isChecked(userData.addonsSelected[1])){
+    if(!isChecked(userData.addonsSelected)){
         toast("Please, fill the add-ons form first!");
         navigate("/addons");
       }

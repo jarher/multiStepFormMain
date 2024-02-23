@@ -12,18 +12,16 @@ export default function DataProvider({ children }) {
       userEmail: { value: "", isValid: false },
       userPhone: { value: "", isValid: false },
       timePlan: "Monthly",
-      planSelected: data.monthly.plan[0],
-      addonsSelected: [data.monthly.addons, data.yearly.addons],
+      planSelected: [...data.plan],
+      addonsSelected: [...data.addons],
     }
   );
-
   const setNavIndex = (value) => setNavbarIndex(value);
 
   return (
     <DataContext.Provider
       value={{
         userData,
-        data,
         navbarIndex,
         setNavIndex,
       }}

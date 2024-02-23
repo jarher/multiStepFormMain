@@ -5,98 +5,49 @@ import HeaderSection from "../../components/HeaderSection/HeaderSection.jsx";
 import Form from "../../components/Form/Form.jsx";
 import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import { UserStatesContext } from "../../Providers/userStatesProvider";
-import getAddons from "../../utils/getAddons.js";
+// import getAddons from "../../utils/getAddons.js";
 import isChecked from "../../utils/isChecked.js";
 import pageTransition from "../../utils/pageTransition.js";
+import getPrice from "../../utils/getPrice.js";
 
 export default function AddOns() {
   const { userData, setNavIndex } = useContext(DataContext);
   const { isFilledForm } = useContext(UserStatesContext);
-  
-  const [addonsIndex, setAddonsIndex] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [isChk01, setIsChk01] = useState(
-    getAddons(userData, addonsIndex, 0).isSelected
-  );
-  const [isChk02, setIsChk02] = useState(
-    getAddons(userData, addonsIndex, 1).isSelected
-  );
-  const [isChk03, setIsChk03] = useState(
-    getAddons(userData, addonsIndex, 2).isSelected
-  );
+  const [isChk01, setIsChk01] = useState(userData.addonsSelected[0].isSelected);
+  const [isChk02, setIsChk02] = useState(userData.addonsSelected[1].isSelected);
+  const [isChk03, setIsChk03] = useState(userData.addonsSelected[2].isSelected);
 
-  const userInputData = [
-    {
-      nameClass: `addonsWrapper ${isChk01 ? "elementSelected" : ""}`,
-      type: "checkbox",
-      name: "checkbox1",
-      id: "checkbox1",
-      labelText: getAddons(userData, addonsIndex, 0).name,
-      ariaText: getAddons(userData, addonsIndex, 0).ariaText,
-      isLegend: true,
-      legend: {
-        description: getAddons(userData, addonsIndex, 0).description,
-        price: getAddons(userData, addonsIndex, 0).price,
-      },
-      defaultChecked: getAddons(userData, addonsIndex, 0).isSelected,
-      helperText: { isValid: false },
-      onClick: (e) => {
-        getAddons(userData, 0, 0).isSelected = e.target.checked;
-        getAddons(userData, 1, 0).isSelected = e.target.checked;
-        setIsActive(
-          isChecked(userData.addonsSelected[0] && userData.addonsSelected[1])
-        );
-        setIsChk01(e.target.checked);
-      },
-    },
-    {
-      nameClass: `addonsWrapper ${isChk02 ? "elementSelected" : ""}`,
-      type: "checkbox",
-      name: "checkbox2",
-      id: "chekcbox2",
-      labelText: getAddons(userData, addonsIndex, 1).name,
-      ariaText: getAddons(userData, addonsIndex, 1).ariaText,
-      isLegend: true,
-      legend: {
-        description: getAddons(userData, addonsIndex, 1).description,
-        price: getAddons(userData, addonsIndex, 1).price,
-      },
-      defaultChecked: getAddons(userData, addonsIndex, 1).isSelected,
-      helperText: { isValid: false },
-      onClick: (e) => {
-        getAddons(userData, 0, 1).isSelected = e.target.checked;
-        getAddons(userData, 1, 1).isSelected = e.target.checked;
-        setIsActive(
-          isChecked(userData.addonsSelected[0] && userData.addonsSelected[1])
-        );
-        setIsChk02(e.target.checked);
-      },
-    },
-    {
-      nameClass: `addonsWrapper ${isChk03 ? "elementSelected" : ""}`,
-      type: "checkbox",
-      name: "checkbox3",
-      id: "username",
-      labelText: getAddons(userData, addonsIndex, 2).name,
-      ariaText: getAddons(userData, addonsIndex, 2).ariaText,
-      isLegend: true,
-      legend: {
-        description: getAddons(userData, addonsIndex, 2).description,
-        price: getAddons(userData, addonsIndex, 2).price,
-      },
-      defaultChecked: getAddons(userData, addonsIndex, 2).isSelected,
-      helperText: { isValid: false },
-      onClick: (e) => {
-        getAddons(userData, 0, 2).isSelected = e.target.checked;
-        getAddons(userData, 1, 2).isSelected = e.target.checked;
-        setIsActive(
-          isChecked(userData.addonsSelected[0] && userData.addonsSelected[1])
-        );
-        setIsChk03(e.target.checked);
-      },
-    },
+  const userInputStates = [
+    [isChk01, setIsChk01],
+    [isChk02, setIsChk02],
+    [isChk03, setIsChk03],
   ];
+
+  const userInputData = userData.addonsSelected.map((addon, index) => {
+    return {
+      nameClass: `addonsWrapper ${
+        userInputStates[index][0] ? "elementSelected" : ""
+      }`,
+      type: "checkbox",
+      name: `checkbox${index + 1}`,
+      id: `checkbox${index + 1}`,
+      labelText: addon.name,
+      ariaText: addon.ariaText,
+      isLegend: true,
+      legend: {
+        description: addon.description,
+        price: getPrice(userData.timePlan, addon)
+      },
+      defaultChecked: addon.isSelected,
+      helperText: { isValid: false },
+      onClick: (e) => {
+        addon.isSelected = e.target.checked;
+        userInputStates[index][1](e.target.checked);
+      },
+    };
+  });
 
   const buttons = [
     {
@@ -117,18 +68,16 @@ export default function AddOns() {
 
   useEffect(() => {
     setNavIndex(2);
-    setIsActive(
-      isChecked(userData.addonsSelected[0] && userData.addonsSelected[1])
-    );
+    setIsActive(isChecked(userData.addonsSelected));
     isFilledForm();
-    setAddonsIndex(userData.timePlan === "Monthly" ? 0 : 1);
     pageTransition(setIsVisible);
   }, []);
 
   useEffect(() => {
+    isChk01 || isChk02 || isChk03 ? setIsActive(true) : setIsActive(false);
     localStorage.setItem("userData", JSON.stringify(userData));
-  }, [isActive]);
-
+  }, [isChk01, isChk02, isChk03]);
+  
   return (
     <section className={`addonsSection ${!isVisible ? "noVisible" : ""}`}>
       <div className="container">

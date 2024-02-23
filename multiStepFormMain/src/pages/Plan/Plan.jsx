@@ -7,16 +7,18 @@ import InputRange from "../../components/InputRange/InputRange.jsx";
 import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import { UserStatesContext } from "../../Providers/userStatesProvider.jsx";
 import pageTransition from "../../utils/pageTransition.js";
+import saveInLocalStorage from "../../utils/saveLocally.js";
+import changeIsSelected from "../../utils/changeIsSelected.js";
 
 export default function Plan() {
-  const { userData, data, setNavIndex } = useContext(DataContext);
+  const { userData, setNavIndex } = useContext(DataContext);
   const { isFilledForm } = useContext(UserStatesContext);
-  const [timePlan, changeTimePlan] = useState(userData.timePlan);
-  const [cardIndex, setCardIndex] = useState(userData.planSelected.planIndex);
+  const [cardIndex, setCardIndex] = useState(
+    userData.planSelected.filter((plan) => plan.isSelected)[0].planIndex
+  );
   const [isVisible, setIsVisible] = useState(false);
-
-  const dataPlan =
-    timePlan === "Monthly" ? data.monthly.plan : data.yearly.plan;
+  const [dataPlan, setDataPlan] = useState(userData.planSelected);
+  const [timePlan, changeTimePlan] = useState(userData.timePlan);
 
   const buttons = [
     {
@@ -42,9 +44,10 @@ export default function Plan() {
   }, []);
 
   useEffect(() => {
-    userData.timePlan = timePlan;
-    localStorage.setItem("userData", JSON.stringify(userData));
-  }, [timePlan, cardIndex]);
+    changeIsSelected(userData, cardIndex);
+    setDataPlan(userData.planSelected);
+    saveInLocalStorage(userData);
+  }, [cardIndex]);
 
   return (
     <section className={`planSection ${!isVisible ? "noVisible" : ""}`}>
@@ -57,17 +60,12 @@ export default function Plan() {
         <div className="cardWrapper">
           {dataPlan.map((plan, index) => (
             <Card
-              cardData={plan}
-              dataPlan={dataPlan}
-              cardIndex={cardIndex}
-              setCardIndex={setCardIndex}
-              timePlan={timePlan}
-              index={index}
+              data={{ plan, timePlan, cardIndex, setCardIndex, index }}
               key={index}
             />
           ))}
         </div>
-        <InputRange timePlan={timePlan} changeTimePlan={changeTimePlan} />
+        <InputRange data={{ timePlan, changeTimePlan }} />
       </div>
       <ButtonsContainer data={buttons} />
     </section>

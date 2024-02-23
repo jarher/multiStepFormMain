@@ -25,8 +25,8 @@ export default function Summary() {
     },
     {
       url: "/confirm",
-      text: "Next Step",
-      classNm: "btnNext",
+      text: "Confirm",
+      classNm: "btnConfirm",
       ariaText: "Go to confirm section",
       isActive: true,
     },

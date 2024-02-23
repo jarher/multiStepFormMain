@@ -2,20 +2,23 @@
 import { useContext, useEffect } from "react";
 import "./InputRange.css";
 import { DataContext } from "../../Providers/Provider";
+import saveInLocalStorage from "../../utils/saveLocally";
 
-export default function InputRange({ timePlan, changeTimePlan }) {
-  const { userData, data } = useContext(DataContext);
+export default function InputRange({data}) {
+  const { userData } = useContext(DataContext);
+  const {timePlan, changeTimePlan} = data;
 
   useEffect(() => {
-    const index = userData.planSelected.planIndex;
-
-    userData.planSelected =
-      timePlan === "Monthly"
-        ? data.monthly.plan[index]
-        : data.yearly.plan[index];
-
-    userData.planSelected.isSelected = true;
-    
+    const data = [userData.planSelected, userData.addonsSelected];
+    data.forEach((element) => {
+      element.forEach((subElement) => {
+        timePlan == "Monthly"
+          ? (subElement.isMonthly = true)
+          : (subElement.isMonthly = false);
+      });
+    });
+    userData.timePlan = timePlan;
+    saveInLocalStorage(userData);
   }, [timePlan]);
 
   return (
