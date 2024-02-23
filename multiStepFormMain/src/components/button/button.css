@@ -5,12 +5,6 @@ button {
   padding: 0 10px;
   transition: all 0.2s ease-in;
 }
-.btnNext:disabled {
-  background-color: var(--Light-gray);
-}
-.btnNext:disabled a {
-  color: var(--White);
-}
 .btnNext {
   background-color: var(--Marine-blue);
 }
@@ -54,6 +48,6 @@ button a {
 .btnPrev a {
   color: var(--Cool-gray);
 }
-.btnNext a {
+.btnNext a{
   color: var(--Light-gray);
 }

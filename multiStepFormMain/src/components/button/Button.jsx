@@ -3,10 +3,10 @@ import "./button.css";
 import { Link } from "react-router-dom";
 
 export function Button({data}) {
-  const { url, text, classNm, ariaText, isActive } = data;
+  const { url, text, classNm, ariaText } = data;
   return (
-    <button className={classNm} disabled={!isActive ? true : false}>
-      {(isActive && <Link to={url} aria-label={ariaText}>{text}</Link>) || <span>{text}</span>}
+    <button className={classNm}>
+      <Link to={url} aria-label={ariaText}>{text}</Link>
     </button>
   );
 }

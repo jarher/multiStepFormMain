@@ -25,15 +25,13 @@ export default function Plan() {
       url: "/",
       text: "Go Back",
       classNm: "btnPrev",
-      ariaText: "Return to user info form",
-      isActive: true,
+      ariaText: "Return to user info form"
     },
     {
       url: "/addons",
       text: "Next Step",
       classNm: "btnNext",
-      ariaText: "Goto user Add-ons section",
-      isActive: true,
+      ariaText: "Goto user Add-ons section"
     },
   ];
 

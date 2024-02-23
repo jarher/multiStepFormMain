@@ -5,15 +5,12 @@ import HeaderSection from "../../components/HeaderSection/HeaderSection.jsx";
 import Form from "../../components/Form/Form.jsx";
 import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import { UserStatesContext } from "../../Providers/userStatesProvider";
-// import getAddons from "../../utils/getAddons.js";
-import isChecked from "../../utils/isChecked.js";
 import pageTransition from "../../utils/pageTransition.js";
 import getPrice from "../../utils/getPrice.js";
 
 export default function AddOns() {
   const { userData, setNavIndex } = useContext(DataContext);
   const { isFilledForm } = useContext(UserStatesContext);
-  const [isActive, setIsActive] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isChk01, setIsChk01] = useState(userData.addonsSelected[0].isSelected);
   const [isChk02, setIsChk02] = useState(userData.addonsSelected[1].isSelected);
@@ -54,27 +51,23 @@ export default function AddOns() {
       url: "/plan",
       text: "Go Back",
       classNm: "btnPrev",
-      ariaText: "Return to plan section",
-      isActive: true,
+      ariaText: "Return to plan section"
     },
     {
-      url: isActive ? "/summary" : "",
+      url: "/summary",
       text: "Next Step",
       classNm: "btnNext",
-      ariaText: "Go to summary section",
-      isActive: isActive,
+      ariaText: "Go to summary section"
     },
   ];
 
   useEffect(() => {
     setNavIndex(2);
-    setIsActive(isChecked(userData.addonsSelected));
     isFilledForm();
     pageTransition(setIsVisible);
   }, []);
 
   useEffect(() => {
-    isChk01 || isChk02 || isChk03 ? setIsActive(true) : setIsActive(false);
     localStorage.setItem("userData", JSON.stringify(userData));
   }, [isChk01, isChk02, isChk03]);
   

@@ -20,15 +20,13 @@ export default function Summary() {
       url: "/addons",
       text: "Go Back",
       classNm: "btnPrev",
-      ariaText: "Return to add-ons section",
-      isActive: true,
+      ariaText: "Return to add-ons section"
     },
     {
       url: "/confirm",
       text: "Confirm",
       classNm: "btnConfirm",
       ariaText: "Go to confirm section",
-      isActive: true,
     },
   ];
 

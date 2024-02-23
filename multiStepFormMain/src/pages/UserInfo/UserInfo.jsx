@@ -8,7 +8,6 @@ import ButtonsContainer from "../../components/button/ButtonsContainer.jsx";
 import userInfoValidate from "../../Validator/userInfoValidate.js";
 import pageTransition from "../../utils/pageTransition.js";
 import saveInLocalStorage from "../../utils/saveLocally.js";
-import isChecked from "../../utils/isChecked.js";
 
 function asignValues(userInfo, validity) {
   userInfo.forEach((element, index) => {
@@ -28,8 +27,6 @@ export default function UserInfo() {
   } = userInfoValidate(userData);
 
   const [isVisible, setIsVisible] = useState(false);
-
-  const [isActive, setIsActive] = useState(true);
 
   const userInfo = [
     {
@@ -77,7 +74,6 @@ export default function UserInfo() {
 
   useEffect(() => {
     setNavIndex(0);
-    setIsActive(isChecked([nameValidity, emailValidity, phoneValidity]));
     pageTransition(setIsVisible);
   }, []);
 
@@ -86,8 +82,6 @@ export default function UserInfo() {
       [userData.userName, userData.userEmail, userData.userPhone],
       [nameValidity, emailValidity, phoneValidity]
     );
-
-    setIsActive(isChecked([nameValidity, emailValidity, phoneValidity]));
     saveInLocalStorage(userData);
   }, [nameValidity, emailValidity, phoneValidity]);
 
@@ -105,11 +99,10 @@ export default function UserInfo() {
       <ButtonsContainer
         data={[
           {
-            url: isActive ? "/plan" : "#",
+            url: "/plan",
             text: "Next Step",
             classNm: "btnNext",
-            ariaText: "Go to plan section",
-            isActive: isActive,
+            ariaText: "Go to plan section"
           },
         ]}
       />
